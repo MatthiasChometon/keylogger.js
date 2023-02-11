@@ -126,6 +126,9 @@ void Click(const Napi::CallbackInfo &info) {
     Napi::Env env = info.Env();
     Napi::Function cb = info[0].As<Napi::Function>();
 
+    GetAsyncKeyState(VK_LBUTTON);
+    GetAsyncKeyState(VK_RBUTTON);
+
     while (true)
     {
         //Check the mouse left button is pressed or not
