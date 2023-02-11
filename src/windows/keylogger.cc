@@ -122,6 +122,25 @@ void Start(const Napi::CallbackInfo &info) {
     });
 }
 
+void Click(const Napi::CallbackInfo &info) {
+    Napi::Env env = info.Env();
+    Napi::Function cb = info[0].As<Napi::Function>();
+
+    while (true)
+    {
+        //Check the mouse left button is pressed or not
+        if (GetAsyncKeyState(VK_LBUTTON) & 1)
+        {
+            cb.Call(env.Global(), {Napi::String::New(env, "Left")});
+        }
+        //Check the mouse right button is pressed or not
+        if (GetAsyncKeyState(VK_RBUTTON) & 1)
+        {
+            cb.Call(env.Global(), {Napi::String::New(env, "Right")});
+        }
+    }
+}
+
 // Called from JS to release the TSFN and stop listening to keyboard events
 void Stop(const Napi::CallbackInfo &info) {
     ReleaseTSFN();
@@ -288,6 +307,7 @@ void FinalizerCallback(Napi::Env env, void *finalizeData, TsfnContext *context) 
 // Declare JS functions and map them to native functions
 Napi::Object Init(Napi::Env env, Napi::Object exports) {
     exports.Set(Napi::String::New(env, "start"), Napi::Function::New(env, Start));
+    exports.Set(Napi::String::New(env, "click"), Napi::Function::New(env, Click));
     exports.Set(Napi::String::New(env, "stop"), Napi::Function::New(env, Stop));
     return exports;
 }
