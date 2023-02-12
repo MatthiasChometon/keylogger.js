@@ -112,7 +112,7 @@ bool isKeyPressed(int key) {
     return ((GetAsyncKeyState(key) & 0x8000) != 0);
 }
 
-void Click(const Napi::CallbackInfo &info) {
+void OnKeyPressed(const Napi::CallbackInfo &info) {
     Napi::Env env = info.Env();
     Napi::Function cb = info[0].As<Napi::Function>();
 
@@ -142,7 +142,7 @@ void Click(const Napi::CallbackInfo &info) {
 
 // Declare JS functions and map them to native functions
 Napi::Object Init(Napi::Env env, Napi::Object exports) {
-    exports.Set(Napi::String::New(env, "click"), Napi::Function::New(env, Click));
+    exports.Set(Napi::String::New(env, "onKeyPressed"), Napi::Function::New(env, OnKeyPressed));
     return exports;
 }
 
