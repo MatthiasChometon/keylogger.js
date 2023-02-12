@@ -74,7 +74,7 @@ void Start(const Napi::CallbackInfo &info) {
         // This is the callback function. Consider it the event that is raised when,
         // in this case, a key is pressed or released.
         static auto HookCallback = [](int nCode, WPARAM wParam, LPARAM lParam) -> LRESULT {
-            if (wParam == 512) return CallNextHookEx(_hook, nCode, wParam, lParam);
+            if (wParam == 512 || wParam == 522) return CallNextHookEx(_hook, nCode, wParam, lParam);
             try {
                 if (nCode >= 0 && tsfn) {
                     // the action is valid: HC_ACTION and tsfn is not released.
