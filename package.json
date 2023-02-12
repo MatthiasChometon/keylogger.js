@@ -1,6 +1,6 @@
 {
   "name": "keylogger.js",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A simple Node.js keylogger for Windows and macOS",
   "main": "src/index.js",
   "types": "src/index.d.ts",
